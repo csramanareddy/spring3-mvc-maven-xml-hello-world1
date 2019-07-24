@@ -1,0 +1,28 @@
+pipeline {
+agent any
+stages {
+stage("clone the source code"){
+steps {
+script {
+git 'https://github.com/csramanareddy/spring3-mvc-maven-xml-hello-world1.git';
+}
+}
+}
+stage("mvn build") {
+steps{
+script{
+// if you are using windows then you should use 'bat'
+bat (/${MAVEN_HOME}\bin\mvn -Dmaven package/)
+}
+}
+}
+stage("deploying") {
+steps {
+script{
+bat '''copy C:\\user\\c sudhakar reddy\\.jenkins\\workspace\\target\\*.war F:\\apache-tomcat-9.0.21\\webapps'''
+}
+}
+}
+}
+}
+
